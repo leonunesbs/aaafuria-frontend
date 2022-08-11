@@ -22,3 +22,4 @@ run as development mode:
 - [x] [Chakra-ui](https://chakra-ui.com/) design system com UI declarativa.
 - [x] [Apollo Client](https://www.apollographql.com/) para conexão com backend (Graphql).
 - [x] [Stripe](https://stripe.com/) para gerir pagamentos e associações.
+- [x] [Pagseguro](https://pagseguro.com.br/) para gerir pagamentos.
