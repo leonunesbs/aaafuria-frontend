@@ -105,7 +105,7 @@ export function Header({}: HeaderProps) {
                     ? '2px solid green'
                     : '2px solid gray'
                 }
-                onClick={() => router.push('/carteirinha')}
+                onClick={() => router.push('/member/my-identity')}
               />
             </>
           ) : (

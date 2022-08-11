@@ -139,7 +139,7 @@ export function SideMenu({}: SideMenuProps) {
                             ? '2px solid green'
                             : '2px solid gray'
                         }
-                        onClick={() => router.push('/carteirinha')}
+                        onClick={() => router.push('/member/my-identity')}
                       />
                       <Stack spacing={0} textColor={bg}>
                         <Text fontSize={['md']} fontWeight="bold">
