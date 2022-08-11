@@ -416,6 +416,7 @@ export default function Home({ post }: HomeProps) {
 }
 
 export const getStaticProps = async () => {
+  export * from './Loja';
   const { data: featurePostData } = await client.query({
     query: gql`
       query {
