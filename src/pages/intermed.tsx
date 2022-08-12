@@ -273,7 +273,7 @@ function Intermed() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push(`/entrar?after=${router.asPath}`);
+      router.push(`/login?after=${router.asPath}`);
     }
   }, [isAuthenticated, router]);
 
