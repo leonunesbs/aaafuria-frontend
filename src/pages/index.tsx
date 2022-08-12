@@ -183,77 +183,6 @@ export default function Home({ post }: HomeProps) {
           </Box>
         </Stack>
       </HomeSection>
-      {post && (
-        <HomeSection id="post" ref={postDiv}>
-          <Stack w="full" spacing={10}>
-            <HStack w={'full'} justify="space-between">
-              {[...Array(6)].map((_, i) => (
-                <Circle key={i} size="15px" bgColor={green} />
-              ))}
-            </HStack>
-            <Grid templateColumns={['1fr', '1fr', '1fr', '1fr 1fr']} gap={4}>
-              <GridItem
-                display={'flex'}
-                justifyContent={['center', 'center', 'center', 'flex-start']}
-              >
-                <Box boxSize={['xs', 'md', 'xl', '3xl']} position="relative">
-                  <ChakraNextImage
-                    placeholder="blur"
-                    blurDataURL={post.image}
-                    layout="fill"
-                    objectFit="cover"
-                    src={post.image}
-                    quality={20}
-                    alt="logo"
-                    draggable={false}
-                    rounded="3xl"
-                  />
-                </Box>
-              </GridItem>
-              <GridItem>
-                <Stack h="100%">
-                  <Box>
-                    <Heading as="h2">{post.title}</Heading>
-                    <CustomDivider />
-                  </Box>
-                  <Textarea
-                    value={post.content}
-                    fontSize={'lg'}
-                    lineHeight={2}
-                    isReadOnly
-                    _focus={{}}
-                    _hover={{}}
-                    p={0}
-                    border=""
-                    minH="xl"
-                  />
-                  <Stack direction={['column', 'row', 'row', 'row']}>
-                    <CustomButton
-                      variant={'solid'}
-                      onClick={() => sejaSocioDiv.current?.scrollIntoView()}
-                    >
-                      Seja Sócio
-                    </CustomButton>
-                    {post.buttonTarget && (
-                      <CustomButton
-                        variant={'outline'}
-                        onClick={() => router.push(post.buttonTarget)}
-                      >
-                        Saiba mais
-                      </CustomButton>
-                    )}
-                  </Stack>
-                </Stack>
-              </GridItem>
-            </Grid>
-            <HStack w={'full'} justify="space-between">
-              {[...Array(6)].map((_, i) => (
-                <Circle key={i} size="15px" bgColor={green} />
-              ))}
-            </HStack>
-          </Stack>
-        </HomeSection>
-      )}
       <HomeSection ref={featuresDiv} id="features">
         <Grid templateColumns={['1fr', '1fr', '1fr', '1fr 2fr']} gap={4}>
           <GridItem>
@@ -393,6 +322,77 @@ export default function Home({ post }: HomeProps) {
           </GridItem>
         </Grid>
       </HomeSection>
+      {post && (
+        <HomeSection id="post" ref={postDiv}>
+          <Stack w="full" spacing={10}>
+            <HStack w={'full'} justify="space-between">
+              {[...Array(6)].map((_, i) => (
+                <Circle key={i} size="15px" bgColor={green} />
+              ))}
+            </HStack>
+            <Grid templateColumns={['1fr', '1fr', '1fr', '1fr 1fr']} gap={4}>
+              <GridItem
+                display={'flex'}
+                justifyContent={['center', 'center', 'center', 'flex-start']}
+              >
+                <Box boxSize={['xs', 'md', 'xl', '3xl']} position="relative">
+                  <ChakraNextImage
+                    placeholder="blur"
+                    blurDataURL={post.image}
+                    layout="fill"
+                    objectFit="cover"
+                    src={post.image}
+                    quality={20}
+                    alt="logo"
+                    draggable={false}
+                    rounded="3xl"
+                  />
+                </Box>
+              </GridItem>
+              <GridItem>
+                <Stack h="100%">
+                  <Box>
+                    <Heading as="h2">{post.title}</Heading>
+                    <CustomDivider />
+                  </Box>
+                  <Textarea
+                    value={post.content}
+                    fontSize={'lg'}
+                    lineHeight={2}
+                    isReadOnly
+                    _focus={{}}
+                    _hover={{}}
+                    p={0}
+                    border=""
+                    minH="xl"
+                  />
+                  <Stack direction={['column', 'row', 'row', 'row']}>
+                    <CustomButton
+                      variant={'solid'}
+                      onClick={() => sejaSocioDiv.current?.scrollIntoView()}
+                    >
+                      Seja Sócio
+                    </CustomButton>
+                    {post.buttonTarget && (
+                      <CustomButton
+                        variant={'outline'}
+                        onClick={() => router.push(post.buttonTarget)}
+                      >
+                        Saiba mais
+                      </CustomButton>
+                    )}
+                  </Stack>
+                </Stack>
+              </GridItem>
+            </Grid>
+            <HStack w={'full'} justify="space-between">
+              {[...Array(6)].map((_, i) => (
+                <Circle key={i} size="15px" bgColor={green} />
+              ))}
+            </HStack>
+          </Stack>
+        </HomeSection>
+      )}
 
       <HomeSection
         ref={sejaSocioDiv}
