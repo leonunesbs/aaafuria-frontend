@@ -94,7 +94,7 @@ export default function Home({ post }: HomeProps) {
               >
                 <CustomButton
                   variant={'solid'}
-                  onClick={() => router.push('/sejasocio')}
+                  onClick={() => router.push('/seja-socio')}
                 >
                   Seja Sócio!
                 </CustomButton>
@@ -416,7 +416,6 @@ export default function Home({ post }: HomeProps) {
 }
 
 export const getStaticProps = async () => {
-  export * from './Loja';
   const { data: featurePostData } = await client.query({
     query: gql`
       query {
