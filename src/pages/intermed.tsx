@@ -273,7 +273,7 @@ function Intermed() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push(`/entrar?after=${router.asPath}`);
+      router.push(`/login?after=${router.asPath}`);
     }
   }, [isAuthenticated, router]);
 
@@ -478,7 +478,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: `/entrar?after=${ctx.resolvedUrl}`,
+        destination: `/login?after=${ctx.resolvedUrl}`,
         permanent: false,
       },
     };
