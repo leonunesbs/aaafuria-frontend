@@ -200,9 +200,9 @@ function Intermed() {
       if (createPayment.paymentCreated) {
         toast({
           title: 'Dados enviados',
-          description: 'Efetue o pagamento.',
+          description: 'Você será redirecionado para o pagamento em instantes.',
           status: 'success',
-          duration: 2500,
+          duration: 5000,
           isClosable: true,
           position: 'top-left',
         });
