@@ -319,21 +319,24 @@ export function SejaSocioPricing({}: SejaSocioPricingProps) {
                           </Button>
                         ) : (
                           <Stack>
-                            {data?.allPaymentMethods?.map((method) => (
-                              <CustomButton
-                                key={method.id}
-                                leftIcon={<BsCurrencyDollar />}
-                                isDisabled={!isAuthenticated}
-                                onClick={() =>
-                                  handlePagar(plano.membershipId, method.id)
-                                }
-                                isLoading={loading}
-                              >
-                                {method.title === 'ST'
-                                  ? 'Cartão de crédito'
-                                  : method.name}
-                              </CustomButton>
-                            ))}
+                            {data?.allPaymentMethods?.map(
+                              (method) =>
+                                method.title !== 'PS' && (
+                                  <CustomButton
+                                    key={method.id}
+                                    leftIcon={<BsCurrencyDollar />}
+                                    isDisabled={!isAuthenticated}
+                                    onClick={() =>
+                                      handlePagar(plano.membershipId, method.id)
+                                    }
+                                    isLoading={loading}
+                                  >
+                                    {method.title === 'ST'
+                                      ? 'Cartão de crédito'
+                                      : method.name}
+                                  </CustomButton>
+                                ),
+                            )}
                           </Stack>
                         )}
                       </Flex>
