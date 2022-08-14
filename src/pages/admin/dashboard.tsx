@@ -66,6 +66,7 @@ function Dashboard() {
         colorScheme="green"
         size={'sm'}
         defaultIndex={index}
+        isLazy
       >
         <TabList fontFamily={'AACHENN'} overflow="auto" py={4}>
           <Tab
