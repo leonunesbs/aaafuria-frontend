@@ -250,11 +250,6 @@ export function CartsTable({}: CartsTableProps) {
   );
 
   return (
-    <CustomTable
-      columns={tableColumns}
-      data={tableData}
-      loading={loading}
-      refetch={refetch}
-    />
+    <CustomTable columns={tableColumns} data={tableData} loading={loading} />
   );
 }

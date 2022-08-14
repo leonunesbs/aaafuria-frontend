@@ -23,7 +23,7 @@ import {
   useTable,
 } from 'react-table';
 import { CustomIconButton, DefaultColumnFilter } from '@/components/atoms';
-import { MdNavigateBefore, MdNavigateNext, MdRefresh } from 'react-icons/md';
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import { useContext, useMemo, useState } from 'react';
 
 import { ColorContext } from '@/contexts/ColorContext';
@@ -64,7 +64,6 @@ export interface CustomTableProps {
   data: any[];
   columns: Column<any>[];
   loading: boolean;
-  refetch?: () => void;
   globalFilter?: boolean;
 }
 
@@ -72,7 +71,6 @@ export function CustomTable({
   data,
   columns,
   loading,
-  refetch,
   globalFilter = false,
 }: CustomTableProps) {
   const { green } = useContext(ColorContext);
@@ -150,11 +148,6 @@ export function CustomTable({
 
   return (
     <TableContainer>
-      <CustomIconButton
-        aria-label="refresh"
-        icon={<MdRefresh size="25px" />}
-        onClick={refetch}
-      />
       <Alert status={loading ? 'info' : 'success'} variant="left-accent" mb={4}>
         <AlertIcon />
         {loading ? 'Sincronizando dados...' : 'Os dados estão sincronizados!'}
