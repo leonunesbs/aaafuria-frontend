@@ -22,11 +22,12 @@ import { MdSend, MdShoppingCart } from 'react-icons/md';
 import { gql, useQuery } from '@apollo/client';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { Layout } from '@/components/templates';
 import { PreviousButton } from '@/components/atoms';
 import { ProductCard } from '@/components/molecules';
 import client from '@/services/apollo-client';
+import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 
 const ANALOG_ITEMS = gql`
@@ -197,7 +198,7 @@ function Pos({ products }: PosProps) {
       });
       router.push('/');
     }
-  }, [router, toast, user?.isStaff]);
+  }, [router, toast, user]);
   return (
     <Layout
       title="POS Fúria"
@@ -280,7 +281,17 @@ function Pos({ products }: PosProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({}) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ['aaafuriaToken']: token } = parseCookies(ctx);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: `/login?after=${ctx.resolvedUrl}`,
+        permanent: false,
+      },
+    };
+  }
   return await client
     .query({
       query: ANALOG_ITEMS,
@@ -290,7 +301,6 @@ export const getStaticProps: GetStaticProps = async ({}) => {
         props: {
           products: data.analogItems.objects,
         },
-        revalidate: 60,
       };
     });
 };
