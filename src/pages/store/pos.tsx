@@ -26,7 +26,6 @@ import { GetServerSideProps } from 'next';
 import { Layout } from '@/components/templates';
 import { PreviousButton } from '@/components/atoms';
 import { ProductCard } from '@/components/molecules';
-import client from '@/services/apollo-client';
 import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 
@@ -143,10 +142,10 @@ export type ProductType = {
 };
 
 interface PosProps {
-  products: ProductType[];
+  products?: ProductType[];
 }
 
-function Pos({ products }: PosProps) {
+function Pos({}: PosProps) {
   const router = useRouter();
   const toast = useToast();
   const { user, token } = useContext(AuthContext);
@@ -155,6 +154,9 @@ function Pos({ products }: PosProps) {
   const [clientRegistration, setClientRegistration] = useState<string | null>(
     null,
   );
+
+  const { data } = useQuery(ANALOG_ITEMS);
+  const products: ProductType[] = data?.analogItems.objects;
 
   const { handleSubmit, control } = useForm<{
     registration: string;
@@ -251,7 +253,7 @@ function Pos({ products }: PosProps) {
           columns={{ base: user?.isStaff ? 2 : 1, md: 3, lg: 3 }}
           gap={2}
         >
-          {products.map((product) => {
+          {products?.map((product) => {
             return (
               <ProductCard
                 key={product.id}
@@ -261,7 +263,7 @@ function Pos({ products }: PosProps) {
             );
           })}
         </SimpleGrid>
-        {products.length === 0 && (
+        {products?.length === 0 && (
           <Text textAlign={'center'}>
             <em>Nenhum produto disponível para compra online no momento.</em>
           </Text>
@@ -292,17 +294,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     };
   }
-  return await client
-    .query({
-      query: ANALOG_ITEMS,
-    })
-    .then(({ data }) => {
-      return {
-        props: {
-          products: data.analogItems.objects,
-        },
-      };
-    });
+
+  return {
+    props: {},
+  };
 };
 
 export default Pos;
