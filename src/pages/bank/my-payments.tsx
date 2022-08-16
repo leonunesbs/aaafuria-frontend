@@ -87,6 +87,8 @@ function MyPayments() {
                       leftIcon={<IoMdEye size="20px" />}
                       aria-label="ver mais"
                       onClick={() => router.push(`/bank/payments/${node.id}`)}
+                      size="sm"
+                      variant={'ghost'}
                     >
                       Ver
                     </CustomButton>
