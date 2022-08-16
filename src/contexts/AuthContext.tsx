@@ -129,6 +129,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 cpf
                 hasActiveMembership
                 isFirstTeamer
+                isCoordinator
                 activeMembership {
                   membershipPlan {
                     title
