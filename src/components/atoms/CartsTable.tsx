@@ -1,6 +1,10 @@
-import { CustomButton, SelectColumnFilter } from '@/components/atoms';
+import { Box, Icon, Text, useToast } from '@chakra-ui/react';
+import {
+  CustomButton,
+  ObjectColumnFilter,
+  SelectColumnFilter,
+} from '@/components/atoms';
 import { HiCheckCircle, HiXCircle } from 'react-icons/hi';
-import { Icon, useToast } from '@chakra-ui/react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useContext, useMemo } from 'react';
 
@@ -29,7 +33,16 @@ const ALL_CARTS = gql`
             item {
               name
               refItem {
+                id
                 name
+                refItem {
+                  id
+                  name
+                  refItem {
+                    id
+                    name
+                  }
+                }
               }
             }
             description
@@ -59,7 +72,16 @@ type Item = {
   item: {
     name: string;
     refItem: {
+      id: string;
       name: string;
+      refItem: {
+        id: string;
+        name: string;
+        refItem: {
+          id: string;
+          name: string;
+        };
+      };
     };
   };
   description: string;
@@ -129,26 +151,26 @@ export function CartsTable({}: CartsTableProps) {
           id: 'items',
           Header: 'Itens',
           accessor: 'items',
-          // Filter: ObjectColumnFilter,
-          // filter: 'object',
-          // Cell: ({
-          //   value: { edges },
-          // }: {
-          //   value: { edges: { node: Item }[] };
-          // }) => {
-          //   return edges.map((item) => (
-          //     <Box key={item.node.id} fontSize="xs" mb={2}>
-          //       <Text>
-          //         {item.node.quantity}x {item.node.title}
-          //       </Text>
-          //       {item.node.description && (
-          //         <Text fontStyle={'italic'} fontSize="xx-small">
-          //           Obs.: {item.node.description}
-          //         </Text>
-          //       )}
-          //     </Box>
-          //   ));
-          // },
+          Filter: ObjectColumnFilter,
+          filter: 'object',
+          Cell: ({
+            value: { edges },
+          }: {
+            value: { edges: { node: Item }[] };
+          }) => {
+            return edges.map((item) => (
+              <Box key={item.node.id} fontSize="xs" mb={2}>
+                <Text>
+                  {item.node.quantity}x {item.node.title}
+                </Text>
+                {item.node.description && (
+                  <Text fontStyle={'italic'} fontSize="xx-small">
+                    Obs.: {item.node.description}
+                  </Text>
+                )}
+              </Box>
+            ));
+          },
         },
         {
           id: 'ordered',

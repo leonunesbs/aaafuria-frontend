@@ -18,11 +18,18 @@ export function ObjectColumnFilter({
   const options = useMemo(() => {
     const options = new Set();
     preFilteredRows.forEach((row: any) =>
-      row.values[id].edges.map(({ node }: { node: any }) =>
-        node.item.refItem
-          ? options.add(node.item.refItem.name)
-          : options.add(node.item.name),
-      ),
+      row.values[id].edges.map(({ node }: { node: any }) => {
+        if (node.item.refItem) {
+          if (node.item.refItem.refItem) {
+            if (node.item.refItem.refItem.refItem) {
+              return options.add(node.item.refItem.refItem?.refItem?.name);
+            }
+            return options.add(node.item.refItem?.refItem?.name);
+          }
+          return options.add(node.item.refItem.name);
+        }
+        return options.add(node.item.name);
+      }),
     );
     return [...options.values()];
   }, [id, preFilteredRows]);
