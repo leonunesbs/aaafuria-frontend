@@ -213,7 +213,7 @@ export default function ScheduleCard({ schedule, refetch }: ScheduleCardProps) {
             <Text>Confirmados: {schedule.confirmedCount}</Text>
             <Text>Status: {schedule.status}</Text>
           </Stack>
-          {user?.isStaff && (
+          {(user?.member.isCoordinator || user?.isStaff) && (
             <ManageScheduleDrawer scheduleId={schedule.id} refetch={refetch} />
           )}
         </HStack>
