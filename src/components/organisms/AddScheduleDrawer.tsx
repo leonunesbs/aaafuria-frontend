@@ -121,7 +121,6 @@ export function AddScheduleDrawer({
 
   const onSubmit: SubmitHandler<Inputs> = useCallback(
     async (data) => {
-      console.log(data);
       await createSchedule({
         variables: {
           ...data,

@@ -31,6 +31,7 @@ const SIGN_IN = gql`
           cpf
           hasActiveMembership
           isFirstTeamer
+          isCoordinator
           activeMembership {
             membershipPlan {
               title
@@ -59,6 +60,7 @@ type UserData = {
     cpf: string;
     hasActiveMembership: boolean;
     isFirstTeamer: boolean;
+    isCoordinator: boolean;
     activeMembership: {
       membershipPlan: {
         title: string;
