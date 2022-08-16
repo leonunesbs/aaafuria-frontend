@@ -9,18 +9,14 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import {
-  CustomIconButton,
-  PageHeading,
-  PreviousButton,
-} from '@/components/atoms';
+import { CustomButton, PageHeading, PreviousButton } from '@/components/atoms';
 import { gql, useQuery } from '@apollo/client';
 
 import { AuthContext } from '@/contexts/AuthContext';
 import { Card } from '@/components/templates';
 import { GetServerSideProps } from 'next';
+import { IoMdEye } from 'react-icons/io';
 import { Layout } from '@/components/templates/Layout';
-import { MdMoreHoriz } from 'react-icons/md';
 import { parseCookies } from 'nookies';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
@@ -87,11 +83,13 @@ function MyPayments() {
               {data?.myPayments?.edges?.map(({ node }) => (
                 <Tr key={node.id}>
                   <Td>
-                    <CustomIconButton
-                      icon={<MdMoreHoriz size="20px" />}
+                    <CustomButton
+                      leftIcon={<IoMdEye size="20px" />}
                       aria-label="ver mais"
                       onClick={() => router.push(`/bank/payments/${node.id}`)}
-                    />
+                    >
+                      Ver
+                    </CustomButton>
                   </Td>
                   <Td>{node.description}</Td>
                   <Td>
