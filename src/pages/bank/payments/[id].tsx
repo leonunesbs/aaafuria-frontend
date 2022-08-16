@@ -370,14 +370,6 @@ function Payment() {
                   <Tbody>
                     <Tr>
                       <Td>
-                        <Text>Identificador:</Text>
-                      </Td>
-                      <Td textAlign={'right'}>
-                        <Text>{data?.payment?.id}</Text>
-                      </Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
                         <Text>Valor:</Text>
                       </Td>
                       <Td textAlign={'right'} isNumeric>
