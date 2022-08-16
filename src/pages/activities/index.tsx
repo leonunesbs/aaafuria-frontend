@@ -4,8 +4,10 @@ import { gql, useQuery } from '@apollo/client';
 import { ActivityCard } from '@/components/molecules';
 import { AuthContext } from '@/contexts/AuthContext';
 import { ColorContext } from '@/contexts/ColorContext';
+import { GetServerSideProps } from 'next';
 import { Layout } from '@/components/templates';
 import { PageHeading } from '@/components/atoms';
+import { parseCookies } from 'nookies';
 import { useContext } from 'react';
 
 const ALL_ACTIVITIES = gql`
