@@ -248,7 +248,7 @@ export function ManageScheduleDrawer({
               <FormControl isReadOnly>
                 <FormLabel htmlFor="activity">Atividade: </FormLabel>
                 <Input
-                  value={data?.schedule.activity.name}
+                  value={data?.schedule?.activity.name}
                   rounded="3xl"
                   focusBorderColor={green}
                 />
@@ -263,7 +263,7 @@ export function ManageScheduleDrawer({
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data?.schedule.usersConfirmed.edges.map(
+                    {data?.schedule?.usersConfirmed.edges.map(
                       ({ node: { id, member } }) => (
                         <ParticipantRow
                           key={id}
