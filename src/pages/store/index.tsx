@@ -2,7 +2,6 @@ import { Box, Center, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import { CustomButton, PageHeading } from '@/components/atoms';
 import { gql, useQuery } from '@apollo/client';
 
-import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { AuthContext } from '@/contexts';
 import { Layout } from '@/components/templates';
 import { MdShoppingCart } from 'react-icons/md';
@@ -159,13 +158,6 @@ function Store({}: StoreProps) {
             onClick={() => router.push('/store/cart')}
           >
             Carrinho
-          </CustomButton>
-          <CustomButton
-            colorScheme="gray"
-            leftIcon={<AiOutlineUnorderedList size="25px" />}
-            onClick={() => router.push('/loja/meus-pedidos')}
-          >
-            Meus pedidos
           </CustomButton>
           <PreviousButton href="/" />
         </Stack>
