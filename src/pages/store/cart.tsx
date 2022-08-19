@@ -226,9 +226,7 @@ function Cart() {
                         <HStack spacing={4} mb={4} w="full">
                           <Box width="150px">
                             <Image
-                              src={
-                                item.refItem ? item.refItem.image : item.image
-                              }
+                              src={item.image ? item.image : item.refItem.image}
                               alt={item.name}
                               rounded={'md'}
                               draggable={false}
