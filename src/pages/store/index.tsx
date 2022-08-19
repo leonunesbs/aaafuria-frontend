@@ -1,15 +1,13 @@
 import { Box, Center, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import { CustomButton, PageHeading } from '@/components/atoms';
+import { gql, useQuery } from '@apollo/client';
 
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { AuthContext } from '@/contexts';
-import { GetStaticProps } from 'next';
 import { Layout } from '@/components/templates';
 import { MdShoppingCart } from 'react-icons/md';
 import { PreviousButton } from '@/components/atoms';
 import { ProductCard } from '@/components/molecules';
-import client from '@/services/apollo-client';
-import { gql } from '@apollo/client';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 
@@ -116,12 +114,15 @@ export type ProductType = {
 };
 
 interface StoreProps {
-  products: ProductType[];
+  products?: ProductType[];
 }
 
-function Store({ products }: StoreProps) {
+function Store({}: StoreProps) {
   const router = useRouter();
   const { user } = useContext(AuthContext);
+
+  const { data } = useQuery(DIGITAL_ITEMS, {});
+  const products: ProductType[] = data?.digitalItems.objects;
 
   return (
     <Layout
@@ -142,11 +143,11 @@ function Store({ products }: StoreProps) {
           columns={{ base: user?.isStaff ? 2 : 1, md: 3, lg: 3 }}
           gap={2}
         >
-          {products.map((product) => {
+          {products?.map((product) => {
             return <ProductCard key={product.id} node={product} />;
           })}
         </SimpleGrid>
-        {products.length === 0 && (
+        {products?.length === 0 && (
           <Text textAlign={'center'}>
             <em>Nenhum produto disponível para compra online no momento.</em>
           </Text>
@@ -172,20 +173,5 @@ function Store({ products }: StoreProps) {
     </Layout>
   );
 }
-
-export const getStaticProps: GetStaticProps = async ({}) => {
-  return await client
-    .query({
-      query: DIGITAL_ITEMS,
-    })
-    .then(({ data }) => {
-      return {
-        props: {
-          products: data.digitalItems.objects,
-        },
-        revalidate: 60,
-      };
-    });
-};
 
 export default Store;
