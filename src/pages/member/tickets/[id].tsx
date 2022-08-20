@@ -326,7 +326,7 @@ export default function Ticket() {
               Usar
             </CustomButton>
           )}
-          <PreviousButton href="/member/my-tickets" />
+          <PreviousButton href="/member/tickets" />
         </Stack>
       </Box>
     </Layout>

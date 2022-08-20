@@ -75,7 +75,7 @@ function Dashboard() {
 
             <CustomButton
               leftIcon={<FaTicketAlt size="20px" />}
-              onClick={() => router.push('/member/my-tickets')}
+              onClick={() => router.push('/member/tickets')}
             >
               Meus ingressos
             </CustomButton>

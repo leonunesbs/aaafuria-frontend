@@ -71,7 +71,7 @@ function MyTickets() {
                       <Text as="span"> {ticket.remainingUses}</Text>
                     </Text>
                     <CustomLink
-                      href={`/store/tickets/${ticket.id}`}
+                      href={`/member/tickets/${ticket.id}`}
                       chakraLinkProps={{
                         fontSize: 'xs',
                         textColor: 'green.500',
