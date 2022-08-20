@@ -20,3 +20,4 @@ export * from './PriceTag';
 export * from './QuantitySelector';
 export * from './SelectColumnFilter';
 export * from './SocialIcons';
+export * from './TicketCircles';
