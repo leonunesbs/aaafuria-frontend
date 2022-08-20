@@ -290,7 +290,7 @@ function Cart() {
                       rules={{ required: 'Método obrigatório' }}
                       render={({ field }) => (
                         <PaymentMethods
-                          disabledMethods={data.cart.disabledPaymentMethods}
+                          disabledMethods={data?.cart.disabledPaymentMethods}
                           {...field}
                         />
                       )}
