@@ -31,6 +31,7 @@ specifiers:
   next-pwa: 5.5.5
   nookies: 2.5.2
   pix-utils: 2.2.2
+  pnpm: 7.9.3
   prettier: 2.7.1
   react: 18.2.0
   react-countup: 6.3.0
@@ -39,6 +40,7 @@ specifiers:
   react-hotjar: 5.0.0
   react-icons: 4.4.0
   react-input-mask: 2.0.4
+  react-qr-code: 2.0.7
   react-table: 7.8.0
   typescript: 4.7.4
 
@@ -54,6 +56,7 @@ dependencies:
   next-pwa: 5.5.5_next@12.2.3
   nookies: 2.5.2
   pix-utils: 2.2.2
+  pnpm: 7.9.3
   react: 18.2.0
   react-countup: 6.3.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -61,6 +64,7 @@ dependencies:
   react-hotjar: 5.0.0
   react-icons: 4.4.0_react@18.2.0
   react-input-mask: 2.0.4_biqbaboplfbrettd7655fr4n2y
+  react-qr-code: 2.0.7_react@18.2.0
   react-table: 7.8.0_react@18.2.0
 
 devDependencies:
@@ -5701,6 +5705,12 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: false
 
+  /pnpm/7.9.3:
+    resolution: {integrity: sha512-0hpAD1vtILw0i9gTN4ffagnScWMW9/avfZIKllBUd++fAvCss+hVgPPDd0HS9XcOT675gid4H9esGkbLdaFy+w==}
+    engines: {node: '>=14.6'}
+    hasBin: true
+    dev: false
+
   /popmotion/11.0.4:
     resolution: {integrity: sha512-gY9zNSzpEaToyS5Nm+PpE9x6Vu5HhuRVbVER+haML+1OkO8B3yCp0rD5UKZUrt5fClX2r2DY7RtDjkp5bcwyPg==}
     dependencies:
@@ -5757,6 +5767,10 @@ packages:
     resolution: {integrity: sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==}
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     dev: true
+
+  /qr.js/0.0.0:
+    resolution: {integrity: sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==}
+    dev: false
 
   /qrcode/1.5.1:
     resolution: {integrity: sha512-nS8NJ1Z3md8uTjKtP+SGGhfqmTCs5flU/xR623oI0JX+Wepz9R8UrRVCTBTJm3qGw3rH6jJ6MUHjkDx15cxSSg==}
@@ -5869,6 +5883,20 @@ packages:
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-qr-code/2.0.7_react@18.2.0:
+    resolution: {integrity: sha512-NpknL80p7dWbLdHfBSIxQIqLCu3+kBlyzYD692rO0UnVwfCSziIxc1xn/p3JhPEv1RV1lRD8j0w+hR3L7tawTQ==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x
+      react-native-svg: '*'
+    peerDependenciesMeta:
+      react-native-svg:
+        optional: true
+    dependencies:
+      prop-types: 15.8.1
+      qr.js: 0.0.0
+      react: 18.2.0
+    dev: false
 
   /react-remove-scroll-bar/2.3.3_3hx2ussxxho4jajbwrd6gq34qe:
     resolution: {integrity: sha512-i9GMNWwpz8XpUpQ6QlevUtFjHGqnPG4Hxs+wlIJntu/xcsZVEpJcIV71K3ZkqNy2q3GfgvkD7y6t/Sv8ofYSbw==}
