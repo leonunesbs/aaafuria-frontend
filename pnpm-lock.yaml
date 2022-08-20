@@ -31,7 +31,6 @@ specifiers:
   next-pwa: 5.5.5
   nookies: 2.5.2
   pix-utils: 2.2.2
-  pnpm: 7.9.3
   prettier: 2.7.1
   react: 18.2.0
   react-countup: 6.3.0
@@ -56,7 +55,6 @@ dependencies:
   next-pwa: 5.5.5_next@12.2.3
   nookies: 2.5.2
   pix-utils: 2.2.2
-  pnpm: 7.9.3
   react: 18.2.0
   react-countup: 6.3.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -5703,12 +5701,6 @@ packages:
   /pngjs/5.0.0:
     resolution: {integrity: sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==}
     engines: {node: '>=10.13.0'}
-    dev: false
-
-  /pnpm/7.9.3:
-    resolution: {integrity: sha512-0hpAD1vtILw0i9gTN4ffagnScWMW9/avfZIKllBUd++fAvCss+hVgPPDd0HS9XcOT675gid4H9esGkbLdaFy+w==}
-    engines: {node: '>=14.6'}
-    hasBin: true
     dev: false
 
   /popmotion/11.0.4:
