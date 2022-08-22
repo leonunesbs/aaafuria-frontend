@@ -1,17 +1,11 @@
 import {
   Box,
   Center,
-  FormControl,
-  FormHelperText,
-  FormLabel,
   HStack,
   Heading,
-  Input,
-  ListItem,
   SimpleGrid,
   Stack,
   Text,
-  UnorderedList,
   useToast,
 } from '@chakra-ui/react';
 import { Card, Layout } from '@/components/templates';
@@ -21,30 +15,29 @@ import { gql, useMutation } from '@apollo/client';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { AuthContext } from '@/contexts/AuthContext';
-import { ColorContext } from '@/contexts/ColorContext';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { MdSend } from 'react-icons/md';
 import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 
-const CREATE_INTERMED_PROFILE = gql`
-  mutation createIntermedProfile(
-    $avatar: Upload!
-    $enroll: Upload!
-    $vaccineCard: Upload!
-    $nickname: String!
-  ) {
-    createIntermedProfile(
-      avatar: $avatar
-      enroll: $enroll
-      vaccineCard: $vaccineCard
-      nickname: $nickname
-    ) {
-      ok
-    }
-  }
-`;
+// const CREATE_INTERMED_PROFILE = gql`
+//   mutation createIntermedProfile(
+//     $avatar: Upload!
+//     $enroll: Upload!
+//     $vaccineCard: Upload!
+//     $nickname: String!
+//   ) {
+//     createIntermedProfile(
+//       avatar: $avatar
+//       enroll: $enroll
+//       vaccineCard: $vaccineCard
+//       nickname: $nickname
+//     ) {
+//       ok
+//     }
+//   }
+// `;
 const CREATE_PAYMENT = gql`
   mutation createPayment(
     $amount: Float!
@@ -75,50 +68,58 @@ const CHECKOUT_PAYMENT = gql`
   }
 `;
 
-type Step1InputData = {
-  nickname: string;
-  avatar: string;
-  vaccineCard: string;
-  enroll: string;
-};
+// type Step1InputData = {
+//   nickname: string;
+//   avatar: string;
+//   vaccineCard: string;
+//   enroll: string;
+// };
 
 type Step2InputData = {
   attachments: string;
 };
 
 function Intermed() {
-  const { green } = useContext(ColorContext);
+  // const { green } = useContext(ColorContext);
   const [pause] = useState(false);
   const toast = useToast();
   const price = useMemo(() => {
     const today = new Date();
     const lotes = [
       {
+        // 0 - Primeiro lote
         atletaOuRitmista: 190,
         socio: 210,
         naoSocio: 260,
       },
+
       {
+        // 1 - Segundo lote
         atletaOuRitmista: 240,
         socio: 270,
         naoSocio: 330,
       },
+
       {
+        // 2 - Terceiro lote
         atletaOuRitmista: 260,
         socio: 290,
         naoSocio: 350,
       },
       {
+        // 3 - Quarto lote
         atletaOuRitmista: 285,
         socio: 310,
         naoSocio: 380,
       },
       {
+        // 4 - Quinto lote
         atletaOuRitmista: 300,
         socio: 350,
         naoSocio: 410,
       },
       {
+        // 5 - Sexto lote
         atletaOuRitmista: 0,
         socio: 0,
         naoSocio: 0,
@@ -156,14 +157,14 @@ function Intermed() {
 
   const { isAuthenticated, user, token } = useContext(AuthContext);
 
-  const [createIntermedProfile, { loading: createIntermedProfileLoading }] =
-    useMutation(CREATE_INTERMED_PROFILE, {
-      context: {
-        headers: {
-          authorization: `JWT ${token}`,
-        },
-      },
-    });
+  // const [createIntermedProfile, { loading: createIntermedProfileLoading }] =
+  //   useMutation(CREATE_INTERMED_PROFILE, {
+  //     context: {
+  //       headers: {
+  //         authorization: `JWT ${token}`,
+  //       },
+  //     },
+  //   });
   const [createPayment, { loading }] = useMutation(CREATE_PAYMENT, {
     context: {
       headers: {
@@ -179,7 +180,7 @@ function Intermed() {
     },
   });
 
-  const step1Form = useForm<Step1InputData>();
+  // const step1Form = useForm<Step1InputData>();
   const step2Form = useForm<Step2InputData>();
 
   const onSubmit: SubmitHandler<Step2InputData> = useCallback(async () => {
@@ -233,43 +234,43 @@ function Intermed() {
     });
   }, [price, user, createPayment, checkoutPayment, toast, router]);
 
-  const handleCreateIntermedProfile: SubmitHandler<Step1InputData> =
-    useCallback(
-      async ({ avatar, enroll, vaccineCard, nickname }) => {
-        await createIntermedProfile({
-          variables: {
-            nickname,
-            avatar: avatar[0],
-            enroll: enroll[0],
-            vaccineCard: vaccineCard[0],
-          },
-        })
-          .then(({ data: { createIntermedProfile } }) => {
-            if (createIntermedProfile.ok) {
-              toast({
-                title: 'Dados salvos com sucesso',
-                description:
-                  'Seus dados foram enviados à organizadora, efetue o pagamento para confirmar sua inscrição',
-                status: 'success',
-                duration: 2500,
-                isClosable: true,
-                position: 'top-left',
-              });
-            }
-          })
-          .catch((err) => {
-            toast({
-              title: 'Erro ao salvar dados',
-              description: err.message,
-              status: 'error',
-              duration: 2500,
-              isClosable: true,
-              position: 'top-left',
-            });
-          });
-      },
-      [createIntermedProfile, toast],
-    );
+  // const handleCreateIntermedProfile: SubmitHandler<Step1InputData> =
+  //   useCallback(
+  //     async ({ avatar, enroll, vaccineCard, nickname }) => {
+  //       await createIntermedProfile({
+  //         variables: {
+  //           nickname,
+  //           avatar: avatar[0],
+  //           enroll: enroll[0],
+  //           vaccineCard: vaccineCard[0],
+  //         },
+  //       })
+  //         .then(({ data: { createIntermedProfile } }) => {
+  //           if (createIntermedProfile.ok) {
+  //             toast({
+  //               title: 'Dados salvos com sucesso',
+  //               description:
+  //                 'Seus dados foram enviados à organizadora, efetue o pagamento para confirmar sua inscrição',
+  //               status: 'success',
+  //               duration: 2500,
+  //               isClosable: true,
+  //               position: 'top-left',
+  //             });
+  //           }
+  //         })
+  //         .catch((err) => {
+  //           toast({
+  //             title: 'Erro ao salvar dados',
+  //             description: err.message,
+  //             status: 'error',
+  //             duration: 2500,
+  //             isClosable: true,
+  //             position: 'top-left',
+  //           });
+  //         });
+  //     },
+  //     [createIntermedProfile, toast],
+  //   );
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -284,8 +285,11 @@ function Intermed() {
       keywords="intermed, fortaleza, furia, ceará, medicina, aaafuria"
     >
       <PageHeading>VI Intermed Nordeste</PageHeading>
+
       {pause ? (
-        <Text>Inscrições pausadas. Tente novamente mais tarde.</Text>
+        <Text textAlign={'center'}>
+          Inscrições pausadas. Tente novamente mais tarde.
+        </Text>
       ) : price.naoSocio === 0 ? (
         <Text textAlign={'center'}>Lote não iniciado</Text>
       ) : (
@@ -293,9 +297,27 @@ function Intermed() {
           <Card>
             <Stack>
               <Heading size="md" as="h2" my={4}>
-                1º PASSO: COMPLETE A SUA INSCRIÇÃO
+                1º PASSO: FAÇA A SUA INSCRIÇÃO
               </Heading>
-              <form
+              <CustomButton
+                onClick={() =>
+                  window.open(
+                    'http://www.intermednordeste.com/login',
+                    'targetWindow',
+                    `toolbar=no,
+                    target=_blank,
+                    status=no,
+                    menubar=no,    
+                    scrollbars=yes,
+                    resizable=yes,
+                    width=720px,
+                    height=1280px`,
+                  )
+                }
+              >
+                Inscreva-se
+              </CustomButton>
+              {/* <form
                 onSubmit={step1Form.handleSubmit(handleCreateIntermedProfile)}
               >
                 <Stack>
@@ -387,7 +409,7 @@ function Intermed() {
                     Enviar
                   </CustomButton>
                 </Stack>
-              </form>
+              </form> */}
             </Stack>
           </Card>
 
