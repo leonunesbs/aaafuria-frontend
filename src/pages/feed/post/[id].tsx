@@ -6,6 +6,7 @@ import {
 } from '@/components/atoms';
 import { Card, Layout } from '@/components/templates';
 import { gql, useMutation, useQuery } from '@apollo/client';
+import '@uiw/react-markdown-preview/markdown.css';
 import { useCallback, useContext } from 'react';
 
 import { AuthContext, ColorContext } from '@/contexts';
@@ -23,11 +24,17 @@ import {
 } from '@chakra-ui/react';
 import { relativeTime } from 'libs/utils';
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
+
+const Markdown = dynamic<any>(
+  () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
+  { ssr: false },
+);
 
 export const GET_POST = gql`
   query getPost($id: ID!) {
@@ -246,8 +253,9 @@ function Post() {
               />
             )}
           </HStack>
-
-          <Text mb={4}>{post?.content}</Text>
+          <Box mb={4}>
+            <Markdown source={post?.content} />
+          </Box>
         </Box>
       </HStack>
       {isOpen ? (

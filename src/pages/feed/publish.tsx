@@ -1,13 +1,23 @@
-import { CustomButton, PageHeading } from '@/components/atoms';
-import { Card, Layout } from '@/components/templates';
+import '@uiw/react-md-editor/markdown-editor.css';
+
 import { AuthContext, ColorContext } from '@/contexts';
+import { Box, HStack, Input, Stack } from '@chakra-ui/react';
+import { Card, Layout } from '@/components/templates';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { CustomButton, PageHeading } from '@/components/atoms';
 import { gql, useMutation } from '@apollo/client';
-import { Box, HStack, Input, Stack, Textarea } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-import { parseCookies } from 'nookies';
 import { useCallback, useContext } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+
+import { GetServerSideProps } from 'next';
+import { MDEditorProps } from '@uiw/react-md-editor';
+import dynamic from 'next/dynamic';
+import { parseCookies } from 'nookies';
+import { useRouter } from 'next/router';
+
+const MDEditor = dynamic<MDEditorProps>(
+  () => import('@uiw/react-md-editor').then((mod) => mod.default),
+  { ssr: false },
+);
 
 const CREATE_POST = gql`
   mutation createPost($title: String, $content: String!) {
@@ -37,7 +47,7 @@ function Publish() {
     },
   });
 
-  const { handleSubmit, register } = useForm<Inputs>();
+  const { handleSubmit, register, control } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = useCallback(
     async ({ title, content }) => {
@@ -62,7 +72,7 @@ function Publish() {
 
         <Card>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack>
+            <Stack spacing={4}>
               <Input
                 rounded="xl"
                 placeholder="Título"
@@ -70,13 +80,20 @@ function Publish() {
                 isRequired
                 {...register('title')}
               />
-              <Textarea
-                rounded="xl"
-                minH={'xs'}
-                focusBorderColor={green}
-                isRequired
-                {...register('content')}
-              />
+
+              <Box>
+                <Controller
+                  name="content"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <MDEditor color="#9aca3c" height={400} {...field} />
+                  )}
+                />
+              </Box>
+
               <HStack justify={'flex-end'}>
                 <CustomButton
                   size="sm"

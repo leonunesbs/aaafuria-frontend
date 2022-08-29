@@ -1,20 +1,20 @@
+import { Box, HStack, List, Text, useColorModeValue } from '@chakra-ui/react';
+import { Card, Layout } from '@/components/templates';
 import {
   CustomIconButton,
   PageHeading,
   PostListItem,
 } from '@/components/atoms';
-import { Card, Layout } from '@/components/templates';
-import { AuthContext, ColorContext } from '@/contexts';
-import { Post } from '@/types/Post';
 import { gql, useQuery } from '@apollo/client';
-import { Box, HStack, List, Text, useColorModeValue } from '@chakra-ui/react';
 
+import { AuthContext } from '@/contexts';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { MdAdd } from 'react-icons/md';
+import { Post } from '@/types/Post';
 import { parseCookies } from 'nookies';
 import { useContext } from 'react';
-import { MdAdd } from 'react-icons/md';
+import { useRouter } from 'next/router';
 
 const GET_POSTS = gql`
   query getPosts {
@@ -44,7 +44,6 @@ type GetPostsData = {
 
 function Blog() {
   const router = useRouter();
-  const { green } = useContext(ColorContext);
   const { user } = useContext(AuthContext);
   const { data } = useQuery<GetPostsData>(GET_POSTS);
   const posts = data?.mainPosts?.objects;
@@ -60,7 +59,12 @@ function Blog() {
           <HStack>
             <Card px={4} py={2}>
               <HStack align={'center'} justify="center" spacing={1}>
-                <Image src={calango} width={'15px'} height={'15px'} />
+                <Image
+                  alt="Fcoins"
+                  src={calango}
+                  width={'15px'}
+                  height={'15px'}
+                />
                 <Text>{user?.member.blogCoins}</Text>
               </HStack>
             </Card>
