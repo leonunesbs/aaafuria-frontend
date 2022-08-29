@@ -1,4 +1,8 @@
-import { CustomButton, PageHeading, PostListItem } from '@/components/atoms';
+import {
+  CustomIconButton,
+  PageHeading,
+  PostListItem,
+} from '@/components/atoms';
 import { Layout } from '@/components/templates';
 import { Post } from '@/types/Post';
 import { gql, useQuery } from '@apollo/client';
@@ -44,15 +48,13 @@ function Blog() {
       <Box maxW="8xl" mx="auto">
         <PageHeading>Feed</PageHeading>
         <HStack justify="flex-end" mb={4}>
-          <CustomButton
+          <CustomIconButton
             variant={'solid'}
-            maxW="3xs"
             size="sm"
-            leftIcon={<MdAdd size="25px" />}
+            icon={<MdAdd size="25px" />}
             onClick={() => router.push('/feed/publish')}
-          >
-            Publicar conteúdo
-          </CustomButton>
+            aria-label={'Publicar conteúdo'}
+          />
         </HStack>
         <List spacing={2}>
           {posts?.map((post: any, i: number) => (
