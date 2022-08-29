@@ -1,7 +1,7 @@
-import { AuthContext, ColorContext } from '@/contexts';
+import { ColorContext } from '@/contexts';
 import { Box, BoxProps, Flex } from '@chakra-ui/react';
+import { ReactNode, useContext } from 'react';
 import { Footer, Header } from '../organisms';
-import { ReactNode, useContext, useEffect } from 'react';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -25,14 +25,8 @@ export function Layout({
   ...rest
 }: LayoutProps) {
   const router = useRouter();
-  const { checkAuth, isAuthenticated } = useContext(AuthContext);
   const { green } = useContext(ColorContext);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      checkAuth();
-    }
-  }, [checkAuth, isAuthenticated]);
   return (
     <>
       <Head>

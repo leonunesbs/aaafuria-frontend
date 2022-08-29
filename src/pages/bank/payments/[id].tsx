@@ -1,4 +1,11 @@
 import {
+  CustomButton,
+  PageHeading,
+  PaymentInstructions,
+} from '@/components/atoms';
+import { Card, Layout } from '@/components/templates';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import {
   Alert,
   AlertIcon,
   Badge,
@@ -6,8 +13,8 @@ import {
   Collapse,
   FormControl,
   FormLabel,
-  HStack,
   Heading,
+  HStack,
   Input,
   Stack,
   Table,
@@ -21,24 +28,17 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { Card, Layout } from '@/components/templates';
-import {
-  CustomButton,
-  PageHeading,
-  PaymentInstructions,
-} from '@/components/atoms';
-import { MdAdd, MdDelete, MdLink, MdSave } from 'react-icons/md';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { gql, useMutation, useQuery } from '@apollo/client';
 import { useCallback, useContext } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { MdAdd, MdDelete, MdLink, MdSave } from 'react-icons/md';
 
+import { CustomIconButton } from '@/components/atoms/CustomIconButton';
 import { AuthContext } from '@/contexts/AuthContext';
 import { ColorContext } from '@/contexts/ColorContext';
-import { CustomIconButton } from '@/components/atoms/CustomIconButton';
-import { FaWhatsapp } from 'react-icons/fa';
 import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const GET_PAYMENT = gql`
   query getPayment($id: ID) {
@@ -624,7 +624,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: `/entrar?after=${ctx.resolvedUrl}`,
+        destination: `/login?after=${ctx.resolvedUrl}`,
         permanent: false,
       },
     };

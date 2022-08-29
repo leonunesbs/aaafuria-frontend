@@ -1,3 +1,5 @@
+import { CustomButton, PageHeading, PreviousButton } from '@/components/atoms';
+import { Card, Layout } from '@/components/templates';
 import {
   As,
   Avatar,
@@ -17,16 +19,14 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Card, Layout } from '@/components/templates';
-import { CustomButton, PageHeading, PreviousButton } from '@/components/atoms';
 
 import { AuthContext } from '@/contexts/AuthContext';
 import { ColorContext } from '@/contexts/ColorContext';
 import { GetServerSideProps } from 'next';
-import InputMask from 'react-input-mask';
-import { MdRefresh } from 'react-icons/md';
 import { parseCookies } from 'nookies';
 import { useContext } from 'react';
+import { MdRefresh } from 'react-icons/md';
+import InputMask from 'react-input-mask';
 
 type MyIdentityProps = BoxProps;
 
@@ -258,7 +258,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: `/entrar?after=${ctx.resolvedUrl}`,
+        destination: `/login?after=${ctx.resolvedUrl}`,
         permanent: false,
       },
     };

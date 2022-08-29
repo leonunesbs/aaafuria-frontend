@@ -1,10 +1,19 @@
 import {
+  CustomButton,
+  CustomIconButton,
+  PageHeading,
+  PreviousButton,
+  TicketCircles,
+} from '@/components/atoms';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import {
   AspectRatio,
   Badge,
   Box,
   Center,
-  HStack,
+  chakra,
   Heading,
+  HStack,
   Icon,
   Image,
   Stack,
@@ -14,30 +23,21 @@ import {
   Td,
   Text,
   Tr,
-  chakra,
   useBreakpointValue,
   useDimensions,
 } from '@chakra-ui/react';
-import {
-  CustomButton,
-  CustomIconButton,
-  PageHeading,
-  PreviousButton,
-  TicketCircles,
-} from '@/components/atoms';
-import { HiCheckCircle, HiXCircle } from 'react-icons/hi';
-import { gql, useMutation, useQuery } from '@apollo/client';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { HiCheckCircle, HiXCircle } from 'react-icons/hi';
 
-import { AuthContext } from '@/contexts/AuthContext';
 import { Card } from '@/components/templates';
-import { FaWhatsapp } from 'react-icons/fa';
-import { GetServerSideProps } from 'next';
 import { Layout } from '@/components/templates/Layout';
+import { AuthContext } from '@/contexts/AuthContext';
+import { GetServerSideProps } from 'next';
 import NextImage from 'next/image';
-import QRCode from 'react-qr-code';
-import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+import { FaWhatsapp } from 'react-icons/fa';
+import QRCode from 'react-qr-code';
 
 const GET_TICKET = gql`
   query getTicket($id: ID) {
@@ -339,7 +339,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: `/entrar?after=${ctx.resolvedUrl}`,
+        destination: `/login?after=${ctx.resolvedUrl}`,
         permanent: false,
       },
     };

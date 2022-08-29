@@ -1,5 +1,5 @@
 import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react';
-import { ReactNode, forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 
 interface CardProps extends BoxProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         py="8"
         px={{ base: '4', md: '10' }}
         shadow={shadow}
-        rounded="3xl"
+        rounded="xl"
         {...rest}
       >
         {children}

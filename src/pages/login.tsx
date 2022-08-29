@@ -1,9 +1,13 @@
 import * as gtag from 'libs/gtag';
 
+import { CustomButton, CustomLink, PageHeading } from '@/components/atoms';
+import { Card, Layout } from '@/components/templates';
 import { AuthContext, ColorContext } from '@/contexts';
+import { gql, useQuery } from '@apollo/client';
 import {
   Box,
   Center,
+  chakra,
   Collapse,
   FormControl,
   FormLabel,
@@ -12,15 +16,10 @@ import {
   PinInputField,
   Stack,
   Text,
-  chakra,
   useColorModeValue,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { Card, Layout } from '@/components/templates';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { CustomButton, CustomLink, PageHeading } from '@/components/atoms';
-import { gql, useQuery } from '@apollo/client';
 import {
   useCallback,
   useContext,
@@ -29,14 +28,13 @@ import {
   useRef,
   useState,
 } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import { AiFillHome } from 'react-icons/ai';
-import { GetServerSideProps } from 'next';
-import { MdLogin } from 'react-icons/md';
-import NextImage from 'next/image';
 import { SignUpDrawer } from '@/components/organisms';
-import { parseCookies } from 'nookies';
+import NextImage from 'next/image';
 import { useRouter } from 'next/router';
+import { AiFillHome } from 'react-icons/ai';
+import { MdLogin } from 'react-icons/md';
 
 const CHECK_MEMBER = gql`
   query checkMember($matricula: String) {
@@ -310,20 +308,3 @@ export default function Login() {
     </Layout>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { ['aaafuriaToken']: token } = parseCookies(ctx);
-
-  if (token) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-};

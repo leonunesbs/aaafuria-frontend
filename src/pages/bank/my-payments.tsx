@@ -1,3 +1,5 @@
+import { CustomButton, PageHeading, PreviousButton } from '@/components/atoms';
+import { gql, useQuery } from '@apollo/client';
 import {
   Badge,
   Table,
@@ -9,17 +11,15 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { CustomButton, PageHeading, PreviousButton } from '@/components/atoms';
-import { gql, useQuery } from '@apollo/client';
 
-import { AuthContext } from '@/contexts/AuthContext';
 import { Card } from '@/components/templates';
-import { GetServerSideProps } from 'next';
-import { IoMdEye } from 'react-icons/io';
 import { Layout } from '@/components/templates/Layout';
+import { AuthContext } from '@/contexts/AuthContext';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useContext } from 'react';
-import { useRouter } from 'next/router';
+import { IoMdEye } from 'react-icons/io';
 
 const MY_PAYMENTS = gql`
   query MyPayments {
@@ -133,7 +133,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!token) {
     return {
       redirect: {
-        destination: `/entrar?after=${ctx.resolvedUrl}`,
+        destination: `/login?after=${ctx.resolvedUrl}`,
         permanent: false,
       },
     };

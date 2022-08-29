@@ -1,3 +1,4 @@
+import { gql, useMutation } from '@apollo/client';
 import {
   Badge,
   Box,
@@ -13,15 +14,14 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, useCallback, useContext } from 'react';
 import { MdLogin, MdMoreVert } from 'react-icons/md';
-import { gql, useMutation } from '@apollo/client';
 
-import { Activity } from '@/pages/activities';
 import { AuthContext } from '@/contexts/AuthContext';
-import { Card } from '../templates';
 import { ColorContext } from '@/contexts/ColorContext';
+import { Activity } from '@/pages/activities';
+import { useRouter } from 'next/router';
 import { CustomIconButton } from '../atoms';
 import { ManageScheduleDrawer } from '../organisms';
-import { useRouter } from 'next/router';
+import { Card } from '../templates';
 
 const CONFIRM_TO_SCHEDULE = gql`
   mutation confirmToSchedule($scheduleId: ID!) {
@@ -194,7 +194,7 @@ export default function ScheduleCard({ schedule, refetch }: ScheduleCardProps) {
             <CustomIconButton
               aria-label={'login'}
               icon={<MdLogin size="20px" />}
-              onClick={() => router.push(`/entrar?after=${router.asPath}`)}
+              onClick={() => router.push(`/login?after=${router.asPath}`)}
             />
           )}
           <CustomIconButton

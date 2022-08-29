@@ -1,4 +1,5 @@
 import { AuthContext, ColorContext } from '@/contexts';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   Box,
   Button,
@@ -22,16 +23,15 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import { CustomButton, CustomDivider } from '../atoms';
 import { ReactNode, useCallback, useContext, useState } from 'react';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { CustomButton, CustomDivider } from '../atoms';
 
-import { BsCurrencyDollar } from 'react-icons/bs';
-import { Card } from '../templates';
-import { HiCheckCircle } from 'react-icons/hi';
-import { MdLogin } from 'react-icons/md';
 import client from '@/services/apollo-client';
 import { useRouter } from 'next/router';
+import { BsCurrencyDollar } from 'react-icons/bs';
+import { HiCheckCircle } from 'react-icons/hi';
+import { MdLogin } from 'react-icons/md';
+import { Card } from '../templates';
 
 const CHECKOUT_MEMBERSHIP = gql`
   mutation checkoutMembership($membershipId: ID!, $methodId: String!) {
@@ -331,9 +331,7 @@ export function SejaSocioPricing({}: SejaSocioPricingProps) {
                                     }
                                     isLoading={loading}
                                   >
-                                    {method.title === 'ST'
-                                      ? 'Cartão de crédito'
-                                      : method.name}
+                                    {method.name}
                                   </CustomButton>
                                 ),
                             )}

@@ -1,5 +1,6 @@
 import { AuthContext, ColorContext } from '@/contexts';
 import { Avatar, Box, Center, Flex, HStack } from '@chakra-ui/react';
+import { ReactNode, useContext, useEffect, useMemo } from 'react';
 import {
   ColorModeToggle,
   CustomButton,
@@ -7,11 +8,10 @@ import {
   CustomLink,
   HeaderImage,
 } from '../atoms';
-import { ReactNode, useContext, useMemo } from 'react';
 
+import { useRouter } from 'next/router';
 import { MdShoppingCart } from 'react-icons/md';
 import { SideMenu } from '.';
-import { useRouter } from 'next/router';
 
 const HeaderMenuItem = ({
   children,
@@ -41,7 +41,7 @@ interface HeaderProps {
 
 export function Header({}: HeaderProps) {
   const router = useRouter();
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, isAuthenticated, checkAuth } = useContext(AuthContext);
 
   const menuItems = useMemo(
     () => [
@@ -54,6 +54,10 @@ export function Header({}: HeaderProps) {
         href: '/store',
       },
       {
+        title: 'Feed',
+        href: '/feed',
+      },
+      {
         title: 'Atividades',
         href: '/activities',
       },
@@ -64,6 +68,12 @@ export function Header({}: HeaderProps) {
     ],
     [],
   );
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      checkAuth();
+    }
+  }, [checkAuth, isAuthenticated]);
   return (
     <Box maxW="8xl" mx="auto">
       <Flex justify="space-between" py="2" mx="auto" px={['2', '10']}>

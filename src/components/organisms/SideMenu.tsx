@@ -14,21 +14,22 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { CustomButton, CustomIconButton, HeaderImage } from '../atoms';
+import { ReactNode, useContext } from 'react';
 import { FaDrum, FaVolleyballBall } from 'react-icons/fa';
 import {
+  MdDynamicFeed,
   MdLogin,
   MdLogout,
   MdManageAccounts,
   MdPerson,
   MdStore,
 } from 'react-icons/md';
-import { ReactNode, useContext } from 'react';
+import { CustomButton, CustomIconButton, HeaderImage } from '../atoms';
 
+import { useRouter } from 'next/router';
 import { AiFillHome } from 'react-icons/ai';
 import { CgMenu } from 'react-icons/cg';
 import { ImCross } from 'react-icons/im';
-import { useRouter } from 'next/router';
 
 interface SideMenuProps {
   children?: ReactNode;
@@ -64,6 +65,15 @@ export function SideMenu({}: SideMenuProps) {
                 onClick={() => router.push('/')}
               >
                 Início
+              </CustomButton>
+              <CustomButton
+                isActive={router.asPath == '/feed'}
+                variant={'solid'}
+                justifyContent={'flex-start'}
+                leftIcon={<MdDynamicFeed size="20px" />}
+                onClick={() => router.push('/feed')}
+              >
+                Feed
               </CustomButton>
               <CustomButton
                 isActive={router.asPath == '/store'}

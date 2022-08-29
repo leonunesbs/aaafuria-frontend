@@ -1,11 +1,11 @@
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import {
-  ReactNode,
   createContext,
+  ReactNode,
   useCallback,
   useMemo,
   useState,
 } from 'react';
-import { destroyCookie, parseCookies, setCookie } from 'nookies';
 
 import client from '@/services/apollo-client';
 import { gql } from '@apollo/client';
@@ -17,6 +17,7 @@ const SIGN_IN = gql`
       token
       payload
       user {
+        id
         isStaff
         member {
           id
@@ -46,6 +47,7 @@ const SIGN_IN = gql`
 `;
 
 type UserData = {
+  id: string;
   isStaff: boolean;
   member: {
     id: string;
@@ -103,10 +105,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserData | null>(null);
 
   const signOut = useCallback(() => {
+    router.push(`/login?after=${router.asPath}`);
     destroyCookie(null, 'aaafuriaToken');
     setUser(null);
-
-    router.reload();
   }, [router]);
 
   const checkAuth = useCallback(async () => {
@@ -115,6 +116,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         query: gql`
           query getUser {
             user {
+              id
               isStaff
               member {
                 id

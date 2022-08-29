@@ -1,3 +1,11 @@
+import dynamic from 'next/dynamic';
+import { PostCardProps } from './PostCard';
+
+export const PostCard = dynamic<PostCardProps>(
+  () => import('../atoms/PostCard').then((mod) => mod.PostCard),
+  { ssr: false },
+);
+
 export * from './ActivityIcon';
 export * from './Analytics';
 export * from './CartsTable';
@@ -15,6 +23,8 @@ export * from './PageHeading';
 export * from './PaymentInstructions';
 export * from './PaymentMethods';
 export * from './PaymentsTable';
+export * from './PostCard';
+export * from './PostListItem';
 export * from './PreviousButton';
 export * from './PriceTag';
 export * from './QuantitySelector';

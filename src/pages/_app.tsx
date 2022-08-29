@@ -23,7 +23,6 @@ const ContextProviders = ({ children }: { children: ReactNode }) => {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
   useEffect(() => {
     if (process.env.NODE_ENV == 'production') {
       hotjar.initialize(2942033, 6);
