@@ -17,7 +17,6 @@ import {
 import { ReactNode, useContext } from 'react';
 import { FaDrum, FaVolleyballBall } from 'react-icons/fa';
 import {
-  MdDynamicFeed,
   MdLogin,
   MdLogout,
   MdManageAccounts,
@@ -65,15 +64,6 @@ export function SideMenu({}: SideMenuProps) {
                 onClick={() => router.push('/')}
               >
                 Início
-              </CustomButton>
-              <CustomButton
-                isActive={router.asPath == '/feed'}
-                variant={'solid'}
-                justifyContent={'flex-start'}
-                leftIcon={<MdDynamicFeed size="20px" />}
-                onClick={() => router.push('/feed')}
-              >
-                Feed
               </CustomButton>
               <CustomButton
                 isActive={router.asPath == '/store'}

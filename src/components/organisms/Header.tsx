@@ -53,10 +53,7 @@ export function Header({}: HeaderProps) {
         title: 'Loja',
         href: '/store',
       },
-      {
-        title: 'Feed',
-        href: '/feed',
-      },
+
       {
         title: 'Atividades',
         href: '/activities',
