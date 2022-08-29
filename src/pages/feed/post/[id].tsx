@@ -4,9 +4,11 @@ import {
   PageHeading,
   PostCard,
 } from '@/components/atoms';
+
 import { Card, Layout } from '@/components/templates';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import '@uiw/react-markdown-preview/markdown.css';
+import '@uiw/react-md-editor/markdown-editor.css';
 import { useCallback, useContext } from 'react';
 
 import { AuthContext, ColorContext } from '@/contexts';
@@ -18,21 +20,26 @@ import {
   Stack,
   Tag,
   Text,
-  Textarea,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import { MDEditorProps } from '@uiw/react-md-editor';
 import { relativeTime } from 'libs/utils';
 import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 
 const Markdown = dynamic<any>(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
+  { ssr: false },
+);
+
+const MDEditor = dynamic<MDEditorProps>(
+  () => import('@uiw/react-md-editor').then((mod) => mod.default),
   { ssr: false },
 );
 
@@ -112,7 +119,7 @@ function Post() {
 
   const { id } = router.query;
 
-  const { register, handleSubmit, reset } = useForm<Inputs>();
+  const { handleSubmit, reset, control } = useForm<Inputs>();
   const { data, refetch } = useQuery<GetPostData>(GET_POST, {
     variables: {
       id,
@@ -261,13 +268,18 @@ function Post() {
       {isOpen ? (
         <form onSubmit={handleSubmit(handleReply)}>
           <Stack>
-            <Textarea
-              rounded={'xl'}
-              focusBorderColor={green}
-              _dark={{ focusBorderColor: green }}
-              minH="3xs"
-              {...register('content')}
-            />
+            <Box>
+              <Controller
+                name="content"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <MDEditor color="#9aca3c" height={400} {...field} />
+                )}
+              />
+            </Box>
             <HStack alignSelf="flex-end" maxW="3xs">
               <CustomButton
                 size="sm"

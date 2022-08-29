@@ -1,7 +1,4 @@
 import { AuthContext, ColorContext } from '@/contexts';
-import { GET_POST } from '@/pages/feed/post/[id]';
-import { Post } from '@/types/Post';
-import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   Box,
   HStack,
@@ -9,17 +6,27 @@ import {
   Stack,
   Tag,
   Text,
-  Textarea,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { relativeTime } from 'libs/utils';
-import { Fragment, useCallback, useContext } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
-import { MdDelete } from 'react-icons/md';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Fragment, useCallback, useContext } from 'react';
+import { gql, useMutation, useQuery } from '@apollo/client';
+
 import { CustomButton } from './CustomButton';
 import { CustomIconButton } from './CustomIconButton';
+import { GET_POST } from '@/pages/feed/post/[id]';
+import { MDEditorProps } from '@uiw/react-md-editor';
+import { MdDelete } from 'react-icons/md';
+import { Post } from '@/types/Post';
+import dynamic from 'next/dynamic';
+import { relativeTime } from 'libs/utils';
+
+const MDEditor = dynamic<MDEditorProps>(
+  () => import('@uiw/react-md-editor').then((mod) => mod.default),
+  { ssr: false },
+);
 
 const CREATE_POST = gql`
   mutation createPost($parentId: ID, $content: String!) {
@@ -64,7 +71,7 @@ export function PostCard({ post, refetchParent }: PostCardProps) {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { handleSubmit, register, reset } = useForm<Inputs>();
+  const { handleSubmit, control, reset } = useForm<Inputs>();
 
   const { data, refetch } = useQuery<GetPostData>(GET_POST, {
     variables: {
@@ -209,13 +216,18 @@ export function PostCard({ post, refetchParent }: PostCardProps) {
         {isOpen ? (
           <form onSubmit={handleSubmit(handleReply)}>
             <Stack>
-              <Textarea
-                rounded={'xl'}
-                focusBorderColor={green}
-                _dark={{ focusBorderColor: green }}
-                minH="3xs"
-                {...register('content')}
-              />
+              <Box>
+                <Controller
+                  name="content"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <MDEditor color="#9aca3c" height={400} {...field} />
+                  )}
+                />
+              </Box>
               <HStack alignSelf="flex-end" maxW="3xs">
                 <CustomButton
                   size="sm"
