@@ -248,57 +248,58 @@ function Post() {
           </HStack>
 
           <Text mb={4}>{post?.content}</Text>
-          {isOpen ? (
-            <form onSubmit={handleSubmit(handleReply)}>
-              <Stack>
-                <Textarea
-                  rounded={'xl'}
-                  focusBorderColor={green}
-                  _dark={{ focusBorderColor: green }}
-                  {...register('content')}
-                />
-                <HStack alignSelf="flex-end" maxW="3xs">
-                  <CustomButton
-                    size="sm"
-                    maxW="3xs"
-                    colorScheme="gray"
-                    variant="ghost"
-                    onClick={onClose}
-                  >
-                    Cancelar
-                  </CustomButton>
-                  <CustomButton
-                    size="sm"
-                    maxW="3xs"
-                    variant="solid"
-                    type="submit"
-                    isLoading={loading}
-                  >
-                    Publicar
-                  </CustomButton>
-                </HStack>
-              </Stack>
-            </form>
-          ) : (
-            <Card>
+        </Box>
+      </HStack>
+      {isOpen ? (
+        <form onSubmit={handleSubmit(handleReply)}>
+          <Stack>
+            <Textarea
+              rounded={'xl'}
+              focusBorderColor={green}
+              _dark={{ focusBorderColor: green }}
+              minH="3xs"
+              {...register('content')}
+            />
+            <HStack alignSelf="flex-end" maxW="3xs">
+              <CustomButton
+                size="sm"
+                maxW="3xs"
+                colorScheme="gray"
+                variant="ghost"
+                onClick={onClose}
+              >
+                Cancelar
+              </CustomButton>
               <CustomButton
                 size="sm"
                 maxW="3xs"
                 variant="solid"
-                colorScheme="gray"
-                onClick={onOpen}
+                type="submit"
+                isLoading={loading}
               >
-                Responder
+                Publicar
               </CustomButton>
-            </Card>
-          )}
-          <Stack>
-            {childrens?.map((children, i: number) => (
-              <PostCard key={i} post={children} refetchParent={refetch} />
-            ))}
+            </HStack>
           </Stack>
-        </Box>
-      </HStack>
+        </form>
+      ) : (
+        <Card>
+          <CustomButton
+            size="sm"
+            maxW="3xs"
+            variant="solid"
+            colorScheme="gray"
+            onClick={onOpen}
+          >
+            Responder
+          </CustomButton>
+        </Card>
+      )}
+      <Stack>
+        {childrens?.map((children, i: number) => (
+          <PostCard key={i} post={children} refetchParent={refetch} />
+        ))}
+      </Stack>
     </Layout>
   );
 }

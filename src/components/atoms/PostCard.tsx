@@ -213,6 +213,7 @@ export function PostCard({ post, refetchParent }: PostCardProps) {
                 rounded={'xl'}
                 focusBorderColor={green}
                 _dark={{ focusBorderColor: green }}
+                minH="3xs"
                 {...register('content')}
               />
               <HStack alignSelf="flex-end" maxW="3xs">
