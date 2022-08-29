@@ -1,6 +1,5 @@
 import { AuthContext, ColorContext } from '@/contexts';
 import { Avatar, Box, Center, Flex, HStack } from '@chakra-ui/react';
-import { ReactNode, useContext, useEffect, useMemo } from 'react';
 import {
   ColorModeToggle,
   CustomButton,
@@ -8,10 +7,11 @@ import {
   CustomLink,
   HeaderImage,
 } from '../atoms';
+import { ReactNode, useContext, useEffect, useMemo } from 'react';
 
-import { useRouter } from 'next/router';
 import { MdShoppingCart } from 'react-icons/md';
 import { SideMenu } from '.';
+import { useRouter } from 'next/router';
 
 const HeaderMenuItem = ({
   children,
@@ -53,7 +53,10 @@ export function Header({}: HeaderProps) {
         title: 'Loja',
         href: '/store',
       },
-
+      {
+        title: 'Feed',
+        href: '/feed',
+      },
       {
         title: 'Atividades',
         href: '/activities',
