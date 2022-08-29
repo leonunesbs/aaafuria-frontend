@@ -30,6 +30,7 @@ const SIGN_IN = gql`
           birthDate
           rg
           cpf
+          blogCoins
           hasActiveMembership
           isFirstTeamer
           isCoordinator
@@ -60,6 +61,7 @@ type UserData = {
     birthDate: string;
     rg: string;
     cpf: string;
+    blogCoins: number;
     hasActiveMembership: boolean;
     isFirstTeamer: boolean;
     isCoordinator: boolean;
@@ -129,6 +131,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 birthDate
                 rg
                 cpf
+                blogCoins
                 hasActiveMembership
                 isFirstTeamer
                 isCoordinator
