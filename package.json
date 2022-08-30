@@ -31,7 +31,7 @@
     "@chakra-ui/styled-system": "2.3.1",
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.10.0",
-    "@uiw/react-md-editor": "3.18.1",
+    "@uiw/react-md-editor": "3.6.0",
     "apollo-upload-client": "17.0.0",
     "babel-plugin-transform-remove-imports": "1.7.0",
     "framer-motion": "7.2.1",
