@@ -58,7 +58,7 @@ export function Layout({
         />
         <meta
           property="og:title"
-          content={title ? `@aaafuria | ${title}` : '@aaafuria'}
+          content={title ? `${title} | @aaafuria` : '@aaafuria'}
         />
         <meta
           property="og:description"
@@ -80,7 +80,7 @@ export function Layout({
         />
         <meta
           property="twitter:title"
-          content={title ? `@aaafuria | ${title}` : '@aaafuria'}
+          content={title ? `${title} | @aaafuria` : '@aaafuria'}
         />
         <meta
           property="twitter:description"
