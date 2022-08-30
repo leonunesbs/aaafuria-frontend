@@ -249,7 +249,7 @@ function Post() {
                   timeZone: 'America/Sao_Paulo',
                 })}
             </Text>
-            {(user?.id === post?.author.id || user?.isStaff) && (
+            {user?.id === post?.author.id && (
               <CustomIconButton
                 size="xs"
                 colorScheme="red"
