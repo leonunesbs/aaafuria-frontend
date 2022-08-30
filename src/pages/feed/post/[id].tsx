@@ -275,9 +275,7 @@ function Post() {
                 rules={{
                   required: true,
                 }}
-                render={({ field }) => (
-                  <MDEditor color="#9aca3c" height={400} {...field} />
-                )}
+                render={({ field }) => <MDEditor height={400} {...field} />}
               />
             </Box>
             <HStack alignSelf="flex-end" maxW="3xs">
