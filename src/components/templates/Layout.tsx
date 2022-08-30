@@ -1,8 +1,8 @@
-import { ColorContext } from '@/contexts';
 import { Box, BoxProps, Flex } from '@chakra-ui/react';
-import { ReactNode, useContext } from 'react';
 import { Footer, Header } from '../organisms';
+import { ReactNode, useContext } from 'react';
 
+import { ColorContext } from '@/contexts';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -31,6 +31,10 @@ export function Layout({
     <>
       <Head>
         <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
         <title>{title ? `${title} | @aaafuria` : '@aaafuria'}</title>
         <meta
           name="description"
