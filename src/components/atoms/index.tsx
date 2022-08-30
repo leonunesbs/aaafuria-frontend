@@ -1,5 +1,4 @@
 export * from './Analytics';
-export * from './CartsTable';
 export * from './ColorModeToggle';
 export * from './CustomButton';
 export * from './CustomDivider';
