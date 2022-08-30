@@ -3,7 +3,7 @@ import { ReactNode, forwardRef, useContext } from 'react';
 
 import { ColorContext } from '@/contexts';
 
-interface CustomIconButtonProps extends IconButtonProps {
+export interface CustomIconButtonProps extends IconButtonProps {
   children?: ReactNode;
 }
 

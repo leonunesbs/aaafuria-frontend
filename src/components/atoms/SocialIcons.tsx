@@ -3,20 +3,21 @@ import {
   AiFillInstagram,
   AiFillTwitterSquare,
 } from 'react-icons/ai';
-import { HStack, Stack, StackProps } from '@chakra-ui/react';
+import { HStack, Stack } from '@chakra-ui/react';
 
 import { CustomIconButton } from './CustomIconButton';
 import { FaTiktok } from 'react-icons/fa';
 import router from 'next/router';
 
-interface SocialIconsProps extends StackProps {
+interface SocialIconsProps {
   variant?: string;
   shouldWrap?: boolean;
+  iconButtonProps?: any;
 }
 
 export function SocialIcons({
   shouldWrap,
-  variant,
+  iconButtonProps,
   ...rest
 }: SocialIconsProps) {
   return (
@@ -28,29 +29,29 @@ export function SocialIcons({
       <HStack>
         <CustomIconButton
           aria-label="Facebook"
-          variant={variant}
           icon={<AiFillFacebook size="35px" />}
           onClick={() => router.push('https://facebook.com/aaafuria')}
+          {...iconButtonProps}
         />
         <CustomIconButton
           aria-label="Instagram"
-          variant={variant}
           icon={<AiFillInstagram size="35px" />}
           onClick={() => router.push('https://instagram.com/aaafuria')}
+          {...iconButtonProps}
         />
       </HStack>
       <HStack>
         <CustomIconButton
           aria-label="Twitter"
-          variant={variant}
           icon={<AiFillTwitterSquare size="35px" />}
           onClick={() => router.push('https://twitter.com/Aaafuria')}
+          {...iconButtonProps}
         />
         <CustomIconButton
           aria-label="TikTok"
-          variant={variant}
           icon={<FaTiktok size="35px" />}
           onClick={() => router.push('https://tiktok.com/@aaafuria')}
+          {...iconButtonProps}
         />
       </HStack>
     </Stack>
