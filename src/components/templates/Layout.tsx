@@ -68,7 +68,7 @@ export function Layout({
               : 'Plataforma de sócios e loja da Associação Atlética de Medicina Fúria Uniniovafapi. Seja sócio da Maior do Piauí e aproveite dos nossos produtos, treinos, ensaios, eventos e mais...'
           }
         />
-        <meta property="og:image" content={'/logo-aaafuria-h.webp'} />
+        <meta property="og:image" content={'/logo-aaafuria.png'} />
         <meta property="og:image:alt" content="logo" />
         <meta property="og:locale" content="pt_BR" />
 
@@ -90,7 +90,7 @@ export function Layout({
               : 'Plataforma de sócios e loja da Associação Atlética de Medicina Fúria Uniniovafapi. Seja sócio da Maior do Piauí e aproveite dos nossos produtos, treinos, ensaios, eventos e mais...'
           }
         />
-        <meta property="twitter:image" content={'/logo-aaafuria-h.webp'} />
+        <meta property="twitter:image" content={'/logo-aaafuria.png'} />
         <meta name="twitter:image:alt" content="logo" />
       </Head>
       {isHeaded && <Header />}
