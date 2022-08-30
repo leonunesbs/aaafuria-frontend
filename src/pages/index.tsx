@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <Layout
-      title="linkTree | @aaafuria"
+      title="fúriaTree"
       py={0}
       pb={10}
       isHeaded={false}
