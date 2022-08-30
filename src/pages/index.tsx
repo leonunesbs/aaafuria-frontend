@@ -13,6 +13,7 @@ export default function Home() {
   return (
     <Layout
       title="fúriaTree"
+      description="Acesso rápido para links em alta!"
       py={0}
       pb={10}
       isHeaded={false}
