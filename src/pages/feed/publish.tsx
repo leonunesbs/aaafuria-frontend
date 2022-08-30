@@ -1,10 +1,18 @@
 import '@uiw/react-md-editor/markdown-editor.css';
 
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  HStack,
+  Input,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import { AuthContext, ColorContext } from '@/contexts';
-import { Box, HStack, Input, Stack } from '@chakra-ui/react';
 import { Card, Layout } from '@/components/templates';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { CustomButton, PageHeading } from '@/components/atoms';
+import { CustomButton, CustomLink, PageHeading } from '@/components/atoms';
 import { gql, useMutation } from '@apollo/client';
 import { useCallback, useContext } from 'react';
 
@@ -69,7 +77,24 @@ function Publish() {
     <Layout title="Publicar novo conteúdo">
       <Box maxW="8xl">
         <PageHeading>Publicar novo conteúdo</PageHeading>
-
+        <Box my={2}>
+          <Alert status={'warning'} rounded="xl">
+            <AlertIcon />
+            <Text>
+              Atenção: Pedimos que{' '}
+              <CustomLink
+                href="/feed/post/UG9zdE5vZGU6Nw=="
+                chakraLinkProps={{
+                  color: green,
+                  _hover: {},
+                }}
+              >
+                leia isso antes
+              </CustomLink>{' '}
+              de fazer sua primeira publicação.
+            </Text>
+          </Alert>
+        </Box>
         <Card>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
