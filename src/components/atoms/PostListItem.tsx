@@ -1,6 +1,7 @@
-import { ColorContext } from '@/contexts';
-import { Post } from '@/types/Post';
+import { AuthContext, ColorContext } from '@/contexts';
 import { Box, HStack, ListItem, Stack, Text } from '@chakra-ui/react';
+
+import { Post } from '@/types/Post';
 import { relativeTime } from 'libs/utils';
 import { useContext } from 'react';
 import { Card } from '../templates';
@@ -13,6 +14,10 @@ interface PostListItemProps {
 
 export function PostListItem({ post, i }: PostListItemProps) {
   const { green } = useContext(ColorContext);
+  const { user } = useContext(AuthContext);
+
+  console.log(post);
+
   return (
     <ListItem key={post.id}>
       <Card py={4}>
@@ -25,12 +30,13 @@ export function PostListItem({ post, i }: PostListItemProps) {
               href={`/feed/post/${post.id}`}
               chakraLinkProps={{
                 _hover: {
-                  color: 'green.500',
-                  _dark: {
-                    color: 'green.200',
-                  },
+                  color: green,
                 },
-                fontWeight: 'bold',
+                fontWeight: post.viewers.edges.filter(
+                  ({ node }) => node.id === user?.id,
+                )
+                  ? 'regular'
+                  : 'bold',
               }}
             >
               {post.title}

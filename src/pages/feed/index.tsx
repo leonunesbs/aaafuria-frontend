@@ -1,20 +1,20 @@
-import { Box, HStack, List, Text, useColorModeValue } from '@chakra-ui/react';
-import { Card, Layout } from '@/components/templates';
 import {
   CustomIconButton,
   PageHeading,
   PostListItem,
 } from '@/components/atoms';
+import { Card, Layout } from '@/components/templates';
 import { gql, useQuery } from '@apollo/client';
+import { Box, HStack, List, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { AuthContext } from '@/contexts';
+import { Post } from '@/types/Post';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { MdAdd } from 'react-icons/md';
-import { Post } from '@/types/Post';
+import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useContext } from 'react';
-import { useRouter } from 'next/router';
+import { MdAdd } from 'react-icons/md';
 
 const GET_POSTS = gql`
   query getPosts {
@@ -29,6 +29,13 @@ const GET_POSTS = gql`
         author {
           member {
             nickname
+          }
+        }
+        viewers {
+          edges {
+            node {
+              id
+            }
           }
         }
       }

@@ -1,3 +1,5 @@
+import { UserData } from './User';
+
 export type Post = {
   id: string;
   parent: Post;
@@ -15,5 +17,10 @@ export type Post = {
   };
   childrens: {
     objects: Post[];
+  };
+  viewers: {
+    edges: {
+      node: UserData;
+    }[];
   };
 };

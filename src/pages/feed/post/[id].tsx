@@ -268,7 +268,7 @@ function Post() {
       {isOpen ? (
         <form onSubmit={handleSubmit(handleReply)}>
           <Stack>
-            <Box>
+            <div data-color-mode="light">
               <Controller
                 name="content"
                 control={control}
@@ -279,7 +279,7 @@ function Post() {
                   <MDEditor color="#9aca3c" height={400} {...field} />
                 )}
               />
-            </Box>
+            </div>
             <HStack alignSelf="flex-end" maxW="3xs">
               <CustomButton
                 size="sm"
