@@ -15,7 +15,7 @@ const defaultOptions: DefaultOptions = {
 
 const uploadLink = createUploadLink({
   uri:
-    process.env.NODE_ENV !== 'development'
+    process.env.NODE_ENV === 'development'
       ? 'http://192.168.5.155:8000/graphql'
       : `${process.env.BACKEND_DOMAIN}/graphql`,
   credentials: 'same-origin',
