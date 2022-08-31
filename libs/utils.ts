@@ -18,6 +18,10 @@ export function relativeTime(dateTime: any) {
     return 'há 1 hora';
   } else if (delta < day) {
     return 'há ' + Math.floor(delta / hour) + ' horas';
+  } else if (delta < day * 2) {
+    return 'há ' + Math.floor(delta / day) + ' dia';
+  } else if (delta < week) {
+    return 'há ' + Math.floor(delta / day) + ' dias';
   } else {
     return false;
   }
