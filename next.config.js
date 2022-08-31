@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const withPlugins = require('next-compose-plugins');
-const withPWA = require('next-pwa');
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  disable: process.env.NODE_ENV === 'development',
+});
 const removeImports = require('next-remove-imports')();
 
 const nextConfig = {
@@ -23,17 +27,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins(
-  [
-    [
-      withPWA,
-      {
-        dest: 'public',
-        register: true,
-        disable: process.env.NODE_ENV === 'development',
-      },
-    ],
-    [removeImports, {}],
-  ],
-  nextConfig,
-);
+module.exports = withPlugins([[withPWA], [removeImports, {}]], nextConfig);
