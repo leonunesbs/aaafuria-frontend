@@ -16,9 +16,9 @@ export function relativeTime(dateTime: any) {
     return 'há ' + Math.floor(delta / minute) + ' minutos';
   } else if (Math.floor(delta / hour) == 1) {
     return 'há 1 hora';
-  } else if (delta < day * 2) {
+  } else if (delta < day) {
     return 'há ' + Math.floor(delta / hour) + ' horas';
+  } else {
+    return false;
   }
-
-  return false;
 }
