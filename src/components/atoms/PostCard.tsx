@@ -1,4 +1,5 @@
 import { AuthContext, ColorContext } from '@/contexts';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   Box,
   HStack,
@@ -9,19 +10,18 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Fragment, useCallback, useContext } from 'react';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
 
+import { GET_POST } from '@/pages/feed/post/[id]';
+import { Post } from '@/types/Post';
+import { MDEditorProps } from '@uiw/react-md-editor';
+import { relativeTime } from 'libs/utils';
+import dynamic from 'next/dynamic';
+import { MdDelete } from 'react-icons/md';
 import { CustomButton } from './CustomButton';
 import { CustomIconButton } from './CustomIconButton';
-import { GET_POST } from '@/pages/feed/post/[id]';
-import { MDEditorProps } from '@uiw/react-md-editor';
-import { MdDelete } from 'react-icons/md';
-import { Post } from '@/types/Post';
-import dynamic from 'next/dynamic';
-import { relativeTime } from 'libs/utils';
 
 const MDEditor = dynamic<MDEditorProps>(
   () => import('@uiw/react-md-editor').then((mod) => mod.default),
@@ -66,7 +66,7 @@ export interface PostCardProps {
 export function PostCard({ post, refetchParent }: PostCardProps) {
   const postId = post.id;
   const { green } = useContext(ColorContext);
-  const { user, token } = useContext(AuthContext);
+  const { user, authCredentials } = useContext(AuthContext);
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -77,28 +77,17 @@ export function PostCard({ post, refetchParent }: PostCardProps) {
     variables: {
       id: postId,
     },
+    ...authCredentials(),
   });
-  const [createPost, { loading }] = useMutation(CREATE_POST, {
-    context: {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    },
-  });
-  const [ratePost, { loading: rating }] = useMutation(RATE_POST, {
-    context: {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    },
-  });
-  const [deletePost, { loading: deleting }] = useMutation(DELETE_POST, {
-    context: {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    },
-  });
+  const [createPost, { loading }] = useMutation(CREATE_POST, authCredentials());
+  const [ratePost, { loading: rating }] = useMutation(
+    RATE_POST,
+    authCredentials(),
+  );
+  const [deletePost, { loading: deleting }] = useMutation(
+    DELETE_POST,
+    authCredentials(),
+  );
   const childrens = data?.post?.childrens.objects;
 
   const handleReply: SubmitHandler<Inputs> = useCallback(

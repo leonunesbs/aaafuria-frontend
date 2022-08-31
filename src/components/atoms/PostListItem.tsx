@@ -16,8 +16,6 @@ export function PostListItem({ post, i }: PostListItemProps) {
   const { green } = useContext(ColorContext);
   const { user } = useContext(AuthContext);
 
-  console.log(post);
-
   return (
     <ListItem key={post.id}>
       <Card py={4}>
@@ -32,11 +30,11 @@ export function PostListItem({ post, i }: PostListItemProps) {
                 _hover: {
                   color: green,
                 },
-                fontWeight: post.viewers.edges.filter(
-                  ({ node }) => node.id === user?.id,
-                )
-                  ? 'regular'
-                  : 'bold',
+                fontWeight:
+                  post.viewers.edges.filter(({ node }) => node.id === user?.id)
+                    .length > 0
+                    ? 'regular'
+                    : 'bold',
               }}
             >
               {post.title}

@@ -11,7 +11,7 @@ import client from '@/services/apollo-client';
 import { gql } from '@apollo/client';
 import { useRouter } from 'next/router';
 
-const SIGN_IN = gql`
+export const SIGN_IN = gql`
   mutation getToken($matricula: String!, $pin: String!) {
     tokenAuth(username: $matricula, password: $pin) {
       token
@@ -94,6 +94,13 @@ interface AuthContextProps {
   signOut: () => void;
   checkAuth: () => Promise<void>;
   user: UserData | null;
+  authCredentials: () => {
+    context: {
+      headers: {
+        Authorization: string;
+      };
+    };
+  };
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -105,6 +112,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAuthenticated = useMemo(() => !!token, [token]);
 
   const [user, setUser] = useState<UserData | null>(null);
+
+  const authCredentials = () => ({
+    context: {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    },
+  });
 
   const signOut = useCallback(() => {
     router.push(`/login?after=${router.asPath}`);
@@ -202,6 +217,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signIn,
         signOut,
         checkAuth,
+        authCredentials,
         user,
       }}
     >

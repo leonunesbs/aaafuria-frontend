@@ -51,8 +51,8 @@ type GetPostsData = {
 
 function Blog() {
   const router = useRouter();
-  const { user } = useContext(AuthContext);
-  const { data } = useQuery<GetPostsData>(GET_POSTS);
+  const { user, authCredentials } = useContext(AuthContext);
+  const { data } = useQuery<GetPostsData>(GET_POSTS, authCredentials());
   const posts = data?.mainPosts?.objects;
   const calango = useColorModeValue(
     '/calango-verde.png',

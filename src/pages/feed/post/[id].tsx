@@ -16,6 +16,7 @@ import { Post } from '@/types/Post';
 import {
   Box,
   HStack,
+  Skeleton,
   Spinner,
   Stack,
   Tag,
@@ -113,7 +114,7 @@ interface GetPostData {
 function Post() {
   const router = useRouter();
   const toast = useToast();
-  const { user, token } = useContext(AuthContext);
+  const { user, authCredentials } = useContext(AuthContext);
   const { green } = useContext(ColorContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -124,32 +125,21 @@ function Post() {
     variables: {
       id,
     },
+    ...authCredentials(),
   });
 
   const post = data?.post;
   const childrens = post?.childrens.objects;
 
-  const [createPost, { loading }] = useMutation(CREATE_POST, {
-    context: {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    },
-  });
-  const [ratePost, { loading: rating }] = useMutation(RATE_POST, {
-    context: {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    },
-  });
-  const [deletePost, { loading: deleting }] = useMutation(DELETE_POST, {
-    context: {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    },
-  });
+  const [createPost, { loading }] = useMutation(CREATE_POST, authCredentials());
+  const [ratePost, { loading: rating }] = useMutation(
+    RATE_POST,
+    authCredentials(),
+  );
+  const [deletePost, { loading: deleting }] = useMutation(
+    DELETE_POST,
+    authCredentials(),
+  );
 
   const handleReply: SubmitHandler<Inputs> = useCallback(
     async ({ content }) => {
@@ -236,33 +226,42 @@ function Post() {
           />
         </Stack>
         <Box w="full">
-          <PageHeading textAlign={'left'}>{post?.title}</PageHeading>
-          <HStack fontSize={'xs'} mb={2}>
-            <Tag colorScheme={'green'} rounded="full" size="sm">
-              {post?.author.member.nickname}
-            </Tag>
-            <Text fontWeight={'light'}>
-              {relativeTime(new Date(post?.created as string)) ||
-                new Date(post?.created as string).toLocaleString('pt-BR', {
-                  timeStyle: 'short',
-                  dateStyle: 'short',
-                  timeZone: 'America/Sao_Paulo',
-                })}
-            </Text>
-            {user?.id === post?.author.id && (
-              <CustomIconButton
-                size="xs"
-                colorScheme="red"
-                icon={<MdDelete size="15px" />}
-                aria-label={'Excluir'}
-                onClick={handleDelete}
-                isLoading={deleting}
-              />
-            )}
-          </HStack>
-          <Box mb={4}>
-            <Markdown source={post?.content} />
-          </Box>
+          {post ? (
+            <PageHeading textAlign={'left'}>{post?.title}</PageHeading>
+          ) : (
+            <Skeleton isLoaded={!!post} maxW="sm" h={6} mb={4} />
+          )}
+          <Skeleton isLoaded={!!post}>
+            <HStack fontSize={'xs'} mb={2}>
+              <Tag colorScheme={'green'} rounded="full" size="sm">
+                {post?.author.member.nickname}
+              </Tag>
+              <Text fontWeight={'light'}>
+                {relativeTime(new Date(post?.created as string)) ||
+                  new Date(post?.created as string).toLocaleString('pt-BR', {
+                    timeStyle: 'short',
+                    dateStyle: 'short',
+                    timeZone: 'America/Sao_Paulo',
+                  })}
+              </Text>
+              {user?.id === post?.author.id && (
+                <CustomIconButton
+                  size="xs"
+                  colorScheme="red"
+                  icon={<MdDelete size="15px" />}
+                  aria-label={'Excluir'}
+                  onClick={handleDelete}
+                  isLoading={deleting}
+                />
+              )}
+            </HStack>
+          </Skeleton>
+
+          <Skeleton isLoaded={!!post}>
+            <Box mb={4}>
+              <Markdown source={post?.content} />
+            </Box>
+          </Skeleton>
         </Box>
       </HStack>
       {isOpen ? (
