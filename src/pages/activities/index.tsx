@@ -1,14 +1,15 @@
-import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { gql, useQuery } from '@apollo/client';
+import { Box, Grid, GridItem, Text, useToast } from '@chakra-ui/react';
+import { useContext, useEffect } from 'react';
 
+import { PageHeading } from '@/components/atoms';
 import { ActivityCard } from '@/components/molecules';
+import { Layout } from '@/components/templates';
 import { AuthContext } from '@/contexts/AuthContext';
 import { ColorContext } from '@/contexts/ColorContext';
 import { GetServerSideProps } from 'next';
-import { Layout } from '@/components/templates';
-import { PageHeading } from '@/components/atoms';
+import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import { useContext } from 'react';
 
 const ALL_ACTIVITIES = gql`
   query allActivities {
@@ -61,8 +62,10 @@ type ActivitiesData = {
 };
 
 function Activities() {
+  const router = useRouter();
+  const toast = useToast();
   const { green } = useContext(ColorContext);
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   const { data, refetch } = useQuery<ActivitiesData>(ALL_ACTIVITIES, {
     context: {
       headers: {
@@ -70,6 +73,20 @@ function Activities() {
       },
     },
   });
+
+  useEffect(() => {
+    if (user && user.member.hasActiveMembership === false) {
+      toast({
+        title: 'Não autorizado',
+        description: 'Associação inativa.',
+        status: 'warning',
+        duration: 2500,
+        isClosable: true,
+        position: 'top-left',
+      });
+      router.push('/seja-socio');
+    }
+  }, [router, toast, user]);
 
   return (
     <Layout
