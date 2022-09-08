@@ -75,7 +75,12 @@ function Activities() {
   });
 
   useEffect(() => {
-    if (user && user.member.hasActiveMembership === false) {
+    if (
+      user &&
+      user.member.hasActiveMembership === false &&
+      user.member.isCoordinator === false &&
+      user.isStaff === false
+    ) {
       toast({
         title: 'Não autorizado',
         description: 'Associação inativa.',
