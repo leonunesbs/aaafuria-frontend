@@ -147,7 +147,7 @@ function Intermed() {
     ) {
       return lotes[3];
     } else if (
-      new Date(2022, 8, 18, 0, 0, 0) < today &&
+      new Date(2022, 8, 20, 0, 0, 0) < today &&
       today <= new Date(2022, 9, 16, 23, 59, 59)
     ) {
       return lotes[4];
