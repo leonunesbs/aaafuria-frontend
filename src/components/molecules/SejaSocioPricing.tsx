@@ -321,7 +321,7 @@ export function SejaSocioPricing({}: SejaSocioPricingProps) {
                           <Stack>
                             {data?.allPaymentMethods?.map(
                               (method) =>
-                                method.title === 'ST' && (
+                                method.title !== 'PS' && (
                                   <CustomButton
                                     key={method.id}
                                     leftIcon={<BsCurrencyDollar />}
