@@ -81,7 +81,7 @@ type Step2InputData = {
 
 function Intermed() {
   // const { green } = useContext(ColorContext);
-  const [pause] = useState(false);
+  const [pause] = useState(true);
   const toast = useToast();
   const price = useMemo(() => {
     const today = new Date();
