@@ -1,19 +1,10 @@
 import {
-  CustomButton,
-  CustomIconButton,
-  PageHeading,
-  PreviousButton,
-  TicketCircles,
-} from '@/components/atoms';
-import { gql, useMutation, useQuery } from '@apollo/client';
-import {
   AspectRatio,
   Badge,
   Box,
   Center,
-  chakra,
-  Heading,
   HStack,
+  Heading,
   Icon,
   Image,
   Stack,
@@ -23,21 +14,30 @@ import {
   Td,
   Text,
   Tr,
+  chakra,
   useBreakpointValue,
   useDimensions,
 } from '@chakra-ui/react';
-import { useContext, useEffect, useRef, useState } from 'react';
+import {
+  CustomButton,
+  CustomIconButton,
+  PageHeading,
+  PreviousButton,
+  TicketCircles,
+} from '@/components/atoms';
 import { HiCheckCircle, HiXCircle } from 'react-icons/hi';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { useContext, useEffect, useRef, useState } from 'react';
 
-import { Card } from '@/components/templates';
-import { Layout } from '@/components/templates/Layout';
 import { AuthContext } from '@/contexts/AuthContext';
-import { GetServerSideProps } from 'next';
-import NextImage from 'next/image';
-import { useRouter } from 'next/router';
-import { parseCookies } from 'nookies';
+import { Card } from '@/components/templates';
 import { FaWhatsapp } from 'react-icons/fa';
+import { GetServerSideProps } from 'next';
+import { Layout } from '@/components/templates/Layout';
+import NextImage from 'next/image';
 import QRCode from 'react-qr-code';
+import { parseCookies } from 'nookies';
+import { useRouter } from 'next/router';
 
 const GET_TICKET = gql`
   query getTicket($id: ID) {
@@ -310,7 +310,7 @@ export default function Ticket() {
           </Box>
         </Card>
         <Stack>
-          {user?.isStaff && data?.ticket && data.ticket.remainingUses > 0 && (
+          {user?.isStaff && (
             <CustomButton
               variant={'solid'}
               isLoading={handleTicketLoading}
