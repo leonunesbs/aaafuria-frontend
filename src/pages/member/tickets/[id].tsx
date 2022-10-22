@@ -140,7 +140,7 @@ export default function Ticket() {
   }, [router.asPath]);
 
   return (
-    <Layout title="Ingresso" isHeaded={false} isFooted={false}>
+    <Layout title="Ingresso" isFooted={false}>
       <Box ref={contentRef} maxW="xl" mx="auto">
         <Card borderRadius={0} position={'relative'} mb={6}>
           <TicketCircles
