@@ -449,6 +449,7 @@ export function SignUpDrawer({ isOpen, onClose, ...rest }: SignUpDrawerProps) {
                           type="file"
                           rounded="3xl"
                           focusBorderColor={green}
+                          isRequired
                           {...field}
                         />
                       )}
