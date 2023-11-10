@@ -55,7 +55,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.0.3",
     "@commitlint/config-conventional": "17.0.3",
-    "@types/apollo-upload-client": "17.0.1",
+    "@types/apollo-upload-client": "17.0.5",
     "@types/gtag.js": "0.0.10",
     "@types/node": "16.11.47",
     "@types/react": "18.0.15",
